@@ -1,0 +1,35 @@
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <%= flash[:notice] %>
+  </div>
+  <div class='row'>
+    <%= render 'layouts/leftside', book: @book, user: @bookshow.user %>
+    <div class='col-md-8 offset-md-1'>
+      <h2>Book detail</h2>
+        <table class='table'>
+          <th>
+            <%= link_to user_path(@bookshow.user_id) do %>
+              <%= attachment_image_tag @bookshow.user, :profile_image, size:'100x100', fallback: "default-image.jpg" %><br>
+              <%= @bookshow.user.name %>
+            <% end %>
+          </th>
+          <th>
+            <%= link_to book_path(@bookshow.id) do %>
+              <%= @bookshow.title %>
+            <% end %>
+          </th>
+          <th><%= @bookshow.body %></th>
+          <th>
+            <% if @bookshow.user_id == current_user.id %>
+              <%= link_to "Edit", edit_book_path(@bookshow.id), class: "btn btn-success" %>
+            <% end %>
+          </th>
+          <th>
+            <% if @bookshow.user_id == current_user.id %>
+              <%= link_to "Destroy", book_path, method: :delete, class: "btn btn-danger", "data-confirm" => "本当に消しますか？" %>
+            <% end %>
+          </th>
+        </table>
+    </div>
+  </div>
+</div>

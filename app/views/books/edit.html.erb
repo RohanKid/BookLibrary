@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto" style="width: 470px;">
+      <h1 class="mt-3">Editing Book</h1>
+      <% if @book.errors.any? %>
+        <h2>
+          <%= @book.errors.count %> error prohibited this obj from being saved:
+        </h2>
+        <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      <% end %>
+      <%= form_with model:@book, local:true do |f| %>
+        <div class="form-group">
+          <label for="image">Image</label>
+          <%= f.attachment_field :profile_image, class: "form-control", id:"image" %>
+        </div>
+        <div class="form-group">
+          <label for="inputTitle">Title</label>
+          <%= f.text_field :title, autofocus: true, class: "form-control", id:"inputTitle" %>
+        </div>
+        <div class="form-group">
+          <label for="inputopinion">Opinion</label>
+          <%= f.text_area :body, class: "form-control ", id:"inputopinion" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "Update Book", class: "btn btn-success" %>
+        </div>
+      <% end %>
+      <div class="form-group mb-0 pb-0">
+        <%= link_to "Show ", book_path(@book.id) %>|<%= link_to " Back", books_path %>
+      </div>
+    </div>
+  </div>
+</div>
